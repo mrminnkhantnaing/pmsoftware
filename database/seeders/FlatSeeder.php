@@ -18,7 +18,7 @@ class FlatSeeder extends Seeder
 
         $flats = [
             [
-                'flat_no' => 502,
+                'flat_no' => 401,
                 'building_id' => 1,
                 'floor_id' => 1,
             ]

@@ -19,9 +19,13 @@ class ReferrerSeeder extends Seeder
         $referrers = [
             [
                 'name' => 'Dejong',
+                'idorpassport' => 'OK123456',
+                'whatsapp_no' => '+97102134857'
             ],
             [
-                'name' => 'Hilda'
+                'name' => 'Selena',
+                'idorpassport' => 'OK123455',
+                'whatsapp_no' => '+97102134856'
             ]
         ];
 

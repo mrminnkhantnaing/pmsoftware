@@ -24,11 +24,13 @@ class DatabaseSeeder extends Seeder
         $this->call(PartitionsSeeder::class);
         $this->call(TenantsSeeder::class);
 
-        // $this->call(TransactionsSeeder::class);
 
-        // $this->call(ReferrerSeeder::class);
+        $this->call(ReferrerSeeder::class);
+
+        $this->call(TransactionsSeeder::class);
         // $this->call(CardReceiptSeeder::class);
-        // \App\Models\Card::factory(200)->create();
-        // \App\Models\Note::factory(10)->create();
+
+        \App\Models\Card::factory(200)->create();
+        \App\Models\Note::factory(10)->create();
     }
 }

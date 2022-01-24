@@ -21,6 +21,15 @@ class RoleAndPermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create permissions
+        Permission::create(['name' => 'create users']);
+        Permission::create(['name' => 'view users']);
+        Permission::create(['name' => 'edit users']);
+        Permission::create(['name' => 'delete users']);
+        Permission::create(['name' => 'manage users']);
+
+        Permission::create(['name' => 'manage permissions']);
+        Permission::create(['name' => 'manage roles']);
+
         Permission::create(['name' => 'create buildings']);
         Permission::create(['name' => 'edit buildings']);
         Permission::create(['name' => 'delete buildings']);
@@ -67,7 +76,7 @@ class RoleAndPermissionSeeder extends Seeder
         $super_admin = Role::create(['name' => 'super-admin']);
 
         $admin = Role::create(['name' => 'admin']);
-        $admin->syncPermissions(['create buildings', 'edit buildings', 'delete buildings', 'create floors', 'edit floors', 'delete floors', 'create flats', 'edit flats', 'delete flats', 'create partitions', 'edit partitions', 'delete partitions', 'create cards', 'edit cards', 'delete cards', 'create tenants', 'edit tenants', 'delete tenants', 'create referrers', 'edit referrers', 'delete referrers', 'manage settings', 'create cardreceipts', 'edit cardreceipts', 'delete cardreceipts', 'create invoices', 'edit invoices', 'delete invoices', 'create paybalances', 'edit paybalances', 'delete paybalances',]);
+        $admin->syncPermissions(['create buildings', 'edit buildings', 'delete buildings', 'create floors', 'edit floors', 'delete floors', 'create flats', 'edit flats', 'delete flats', 'create partitions', 'edit partitions', 'delete partitions', 'create cards', 'edit cards', 'delete cards', 'create tenants', 'edit tenants', 'delete tenants', 'create referrers', 'edit referrers', 'delete referrers', 'manage settings', 'create cardreceipts', 'edit cardreceipts', 'delete cardreceipts', 'create invoices', 'edit invoices', 'delete invoices', 'create paybalances', 'edit paybalances', 'delete paybalances', 'edit users', 'view users']);
 
         $manager = Role::create(['name' => 'manager']);
         $manager->syncPermissions(['create buildings', 'create floors', 'create flats', 'create partitions', 'create cards', 'create tenants', 'create referrers', 'create cardreceipts', 'create invoices', 'create paybalances',]);
@@ -79,13 +88,13 @@ class RoleAndPermissionSeeder extends Seeder
         $mrfrank = User::findOrFail(1);
         $mrfrank->assignRole($super_admin);
 
-        $admin_user = User::findOrFail(3);
+        $admin_user = User::findOrFail(2);
         $admin_user->assignRole($admin);
 
-        $manager_user = User::findOrFail(4);
+        $manager_user = User::findOrFail(3);
         $manager_user->assignRole($manager);
 
-        $supervisor_user = User::findOrFail(5);
+        $supervisor_user = User::findOrFail(4);
         $supervisor_user->assignRole($supervisor);
     }
 }

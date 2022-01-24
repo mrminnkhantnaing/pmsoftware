@@ -21,6 +21,9 @@ Auth::routes([
 Route::group(['middleware' => 'auth'], function() {
     // Dashboard
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('/users', App\Http\Controllers\Users\UserController::class)->except(['show', 'create', 'edit']);
+
     Route::group(['prefix' => '/dashboard', 'as' => 'dashboard.'], function() {
         Route::get('/new-tenants', [\App\Http\Controllers\DashboardController::class, 'newTenants'])->name('newTenants');
         Route::get('/available-partitions', [\App\Http\Controllers\DashboardController::class, 'availablePartitions'])->name('availablePartitions');

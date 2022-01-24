@@ -30,17 +30,6 @@ class UsersSeeder extends Seeder
             'remember_token' => Str::random(10),
             ],
             [
-            'name' => 'Khin Zin Zin Thinn',
-            'username' => 'khinnzinzinthinn',
-            'phone_no' => '+971 58531 4573',
-            'email' => 'khinzinzinthinn@gmail.com',
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'address' => 'Yangon, Myanmar',
-            'profile_picture' => 'images/profile_pictures/mrminnkhantnaing.jpeg',
-            'remember_token' => Str::random(10),
-            ],
-            [
             'name' => 'Barack Obama',
             'username' => 'barackobama',
             'phone_no' => '+1 23456 7890',

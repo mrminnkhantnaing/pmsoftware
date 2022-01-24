@@ -18,8 +18,8 @@ class BuildingsSeeder extends Seeder
 
         $buildings = [
             [
-                'name' => 'Tower 2',
-                'slug' => 'tower-2',
+                'name' => 'Tower 1',
+                'slug' => 'tower-one',
                 'location' => 'Day To Day',
                 'full_address' => 'Deira, Dubai, UAE',
             ],

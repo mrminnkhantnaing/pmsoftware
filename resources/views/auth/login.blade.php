@@ -23,9 +23,9 @@
                                         @csrf
 
                                         <div class="col-12">
-                                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                                            <input type="email" class="form-control @error('email') border border-danger @enderror" name="email" id="email" value="{{ old('email') ? old('email') : '' }}" required autocomplete="email" autofocus placeholder="Email Address">
-                                            @error('email')
+                                            <label for="username" class="form-label">{{ __('Username') }}</label>
+                                            <input type="text" class="form-control @error('username') border border-danger @enderror" name="username" id="username" value="{{ old('username') ? old('username') : '' }}" required autocomplete="username" autofocus placeholder="Enter Username">
+                                            @error('username')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -33,7 +33,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="password" class="form-label">{{ __('Enter Password') }}</label>
+                                            <label for="password" class="form-label">{{ __('Password') }}</label>
                                             <div class="input-group" id="show_hide_password">
                                                 <input type="password" class="form-control border-end-0 @error('password') border border-danger @enderror" name="password" id="password" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
                                             </div>

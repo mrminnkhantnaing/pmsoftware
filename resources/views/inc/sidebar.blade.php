@@ -244,14 +244,25 @@
             </li>
         @endcan
 
-        <li class="{{ $route === 'profile.show' ? 'mm-show' : '' }}">
-            <a href="/{{ Auth::user()->username }}">
-                <div class="parent-icon">
-                    <i class='bx bx-user'></i>
-                </div>
-                <div class="menu-title">Profile</div>
-            </a>
-        </li>
+        @can('view users')
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon">
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="menu-title">Users</div>
+                </a>
+                <ul>
+                    <li class="{{ $route === 'users.index' ? 'mm-show' : '' }}">
+                        <a href="{{ route('users.index') }}"><i class="bx bx-right-arrow-alt"></i>All Users</a>
+                    </li>
+                    <li class="{{ $route === 'profile.show' ? 'mm-show' : '' }}">
+                        <a href="/{{ Auth::user()->username }}"><i class="bx bx-right-arrow-alt"></i>Profile</a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
+
         <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">

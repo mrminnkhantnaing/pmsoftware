@@ -18,10 +18,10 @@ class SettingsSeeder extends Seeder
 
         $settings = [
             [
-                'company_name' => 'MSHT Facilities Management',
-                'company_phone_no' => '0504306534',
-                'company_email' => 'info@msht.com',
-                'company_address' => 'Omar Bin Al Khattab St, Deira, Dubai',
+                'company_name' => 'PM Software',
+                'company_phone_no' => '0598765432',
+                'company_email' => 'info@pmsoftware.xyz',
+                'company_address' => 'Al Rigga Street, Deira, Dubai, UAE',
                 'invoice_prefix' => 'AA',
                 'invoice_theme_color' => '#E7A602',
                 'currency' => 'AED',

@@ -18,7 +18,7 @@ class FloorsSeeder extends Seeder
 
         $floors = [
             [
-                'name' => '5th Floor',
+                'name' => '4th Floor',
                 'building_id' => 1,
             ]
         ];

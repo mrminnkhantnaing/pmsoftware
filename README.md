@@ -29,6 +29,7 @@
 - Tenant CRUD
 - Referrer CRUD
 - Profile Management
+- User Management
 
 #### When This Project Goes Live, Run
 ```
