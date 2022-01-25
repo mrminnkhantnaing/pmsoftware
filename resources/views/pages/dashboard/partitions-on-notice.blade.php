@@ -90,6 +90,13 @@
                                                                 <span class="text-danger">On Notice</span>
                                                             @endif
                                                         </span>
+                                                        <span class="d-block mb-2">
+                                                            @if ($partition->status !== 'available')
+                                                                <strong>Tenant: </strong><a class="text-dark" href="{{ route('tenants.show', $partition->transactions->first()->tenant_id) }}">
+                                                                    {{ ucfirst($partition->transactions->first()->tenant->name) }}
+                                                                </a>
+                                                            @endif
+                                                        </span>
                                                         <span class="d-block mb-2"><strong>Flat:</strong> {{ $partition->flat->flat_no }}</span>
                                                         <span class="d-block mb-2"><strong>Floor:</strong> {{ $partition->floor->name }}</span>
                                                         <span class="d-block mb-2"><strong>Building:</strong> {{ $partition->building->name }}</span>

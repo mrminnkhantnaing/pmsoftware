@@ -11,6 +11,8 @@ class Partition extends Model
 
     protected $fillable = ['id', 'p_number', 'status', 'building_id', 'floor_id', 'flat_id'];
 
+    protected $with = ['transactions', 'transactions.tenant'];
+
     // Relationship With Building
     public function building() {
         return $this->belongsTo(Building::class);
@@ -28,6 +30,6 @@ class Partition extends Model
 
     // Relationship With Transactions
     public function transactions() {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class)->latest();
     }
 }

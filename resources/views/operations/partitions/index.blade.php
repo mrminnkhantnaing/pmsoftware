@@ -40,6 +40,7 @@
                             <th>#</th>
                             <th>Partition No.</th>
                             <th>Status</th>
+                            <th>Current Tenant</th>
                             <th>Building</th>
                             <th>Floor</th>
                             <th>Flat</th>
@@ -58,6 +59,15 @@
                                         <span class="text-danger">Occupied</span>
                                     @elseif ($partition->status == 'notice')
                                         <span class="text-warning">On Notice</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($partition->status !== 'available')
+                                        <a class="text-dark" href="{{ route('tenants.show', $partition->transactions->first()->tenant_id) }}">
+                                            {{ $partition->transactions->first()->tenant->name }}
+                                        </a>
+                                    @else
+                                        -
                                     @endif
                                 </td>
                                 <td><a class="text-dark" title="View" href="{{ route('buildings.show', $partition->building->slug) }}">{{ $partition->building->name }}</a></td>
@@ -86,6 +96,13 @@
                                                                 <span class="text-danger">Occupied</span>
                                                             @elseif ($partition->status == 'notice')
                                                                 <span class="text-warning">On Notice</span>
+                                                            @endif
+                                                        </span>
+                                                        <span class="d-block mb-2">
+                                                            @if ($partition->status !== 'available')
+                                                                <strong>Tenant: </strong><a class="text-dark" href="{{ route('tenants.show', $partition->transactions->first()->tenant_id) }}">
+                                                                    {{ ucfirst($partition->transactions->first()->tenant->name) }}
+                                                                </a>
                                                             @endif
                                                         </span>
                                                         <span class="d-block mb-2"><strong>Flat:</strong> {{ $partition->flat->flat_no }}</span>
