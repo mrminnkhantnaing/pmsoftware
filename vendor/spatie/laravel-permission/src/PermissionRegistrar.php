@@ -5,6 +5,8 @@ namespace Spatie\Permission;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Contracts\Role;
@@ -41,7 +43,7 @@ class PermissionRegistrar
     /** @var string */
     public static $teamsKey;
 
-    /** @var int */
+    /** @var int|string */
     protected $teamId = null;
 
     /** @var string */
@@ -79,7 +81,7 @@ class PermissionRegistrar
         $this->cache = $this->getCacheStoreFromConfig();
     }
 
-    protected function getCacheStoreFromConfig(): \Illuminate\Contracts\Cache\Repository
+    protected function getCacheStoreFromConfig(): Repository
     {
         // the 'default' fallback here is from the permission.php config file,
         // where 'default' means to use config(cache.default)
@@ -163,7 +165,7 @@ class PermissionRegistrar
      */
     private function loadPermissions()
     {
-        if ($this->permissions !== null) {
+        if ($this->permissions) {
             return;
         }
 
@@ -265,12 +267,12 @@ class PermissionRegistrar
         return $this;
     }
 
-    /**
-     * Get the instance of the Cache Store.
-     *
-     * @return \Illuminate\Contracts\Cache\Store
-     */
-    public function getCacheStore(): \Illuminate\Contracts\Cache\Store
+    public function getCacheRepository(): Repository
+    {
+        return $this->cache;
+    }
+
+    public function getCacheStore(): Store
     {
         return $this->cache->getStore();
     }

@@ -81,8 +81,8 @@ class RoleAndPermissionSeeder extends Seeder
         $manager = Role::create(['name' => 'manager']);
         $manager->syncPermissions(['create buildings', 'create floors', 'create flats', 'create partitions', 'create cards', 'create tenants', 'create referrers', 'create cardreceipts', 'create invoices', 'create paybalances',]);
 
-        $supervisor = Role::create(['name' => 'supervisor']);
-        $supervisor->syncPermissions(['create buildings', 'create floors', 'create flats', 'create partitions', 'create cards', 'create tenants', 'create referrers', 'create cardreceipts', 'create invoices', 'create paybalances',]);
+        $user = Role::create(['name' => 'user']);
+        $user->syncPermissions(['create buildings', 'create floors', 'create flats', 'create partitions', 'create cards', 'create tenants', 'create referrers', 'create cardreceipts', 'create invoices', 'create paybalances',]);
 
         // Give roles to users
         $mrfrank = User::findOrFail(1);
@@ -94,7 +94,7 @@ class RoleAndPermissionSeeder extends Seeder
         $manager_user = User::findOrFail(3);
         $manager_user->assignRole($manager);
 
-        $supervisor_user = User::findOrFail(4);
-        $supervisor_user->assignRole($supervisor);
+        $user_user = User::findOrFail(4);
+        $user_user->assignRole($user);
     }
 }

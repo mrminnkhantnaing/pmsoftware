@@ -4,10 +4,6 @@
     Invoice Settings | {{ config('app.name', 'PM Software') }}
 @endsection
 
-@section('page-specific-head-scripts')
-    <script src="https://cdn.tiny.cloud/1/mq77huw4a9lbqprjhzn05fmwim1rq47nboyxhux0t1yv3gs2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-@endsection
-
 @section('content')
     {{-- Breadcrumb --}}
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -109,12 +105,3 @@
         </div>
     </div>
 @endsection
-
-{{-- @section('page-specific-js')
-    <script>
-        tinymce.init({
-        selector: 'textarea',
-        toolbar_mode: 'floating',
-        });
-    </script>
-@endsection --}}

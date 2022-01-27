@@ -340,7 +340,7 @@ class Sheet
         foreach ($this->worksheet->getRowIterator($startRow, $endRow) as $index => $row) {
             $row = new Row($row, $headingRow);
 
-            if ($import instanceof SkipsEmptyRows && $row->isEmpty($calculateFormulas)) {
+            if ($import instanceof SkipsEmptyRows && $row->isEmpty($calculateFormulas, $endColumn)) {
                 continue;
             }
 
@@ -528,10 +528,18 @@ class Sheet
      */
     public function formatColumn(string $column, string $format)
     {
-        $this->worksheet
-            ->getStyle($column . '1:' . $column . $this->worksheet->getHighestRow())
-            ->getNumberFormat()
-            ->setFormatCode($format);
+        // If the column is a range, we wouldn't need to calculate the range.
+        if (stripos($column, ':') !== false) {
+            $this->worksheet
+                ->getStyle($column)
+                ->getNumberFormat()
+                ->setFormatCode($format);
+        } else {
+            $this->worksheet
+                ->getStyle($column . '1:' . $column . $this->worksheet->getHighestRow())
+                ->getNumberFormat()
+                ->setFormatCode($format);
+        }
     }
 
     /**
