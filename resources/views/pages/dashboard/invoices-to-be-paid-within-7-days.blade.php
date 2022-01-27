@@ -35,8 +35,8 @@
                             <th>Invoice No.</th>
                             <th>ID / Passport</th>
                             <th>Partition / Flat / Floor / Building</th>
-                            <th>Status</th>
                             <th class="text-center">Amount</th>
+                            <th class="text-center">Balance</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -58,14 +58,8 @@
                                     {{-- Show Partition Modal --}}
                                     @include('inc.coms.modals.show-partition-modal-via-transaction')
                                 </td>
-                                <td>
-                                    @if ($transaction->invoice_status == 'partially_paid')
-                                        <span class="text-primary">Partially Paid</span>
-                                    @elseif ($transaction->invoice_status == 'fully_paid')
-                                        <span class="text-success">Fully Paid</span>
-                                    @endif
-                                </td>
                                 <td class="text-end">{{ number_format($transaction->total_price, 0, '.', ',') }} {{ $transaction->currency }}</td>
+                                <td class="text-end">{{ number_format($transaction->balance, 0, '.', ',') }} {{ $transaction->currency }}</td>
                                 <td>
                                     <a class="btn btn-outline-dark btn-sm" title="View" href="{{ route('invoices.show', $transaction->id) }}">
                                         <i class='bx bx-show me-0'></i>
