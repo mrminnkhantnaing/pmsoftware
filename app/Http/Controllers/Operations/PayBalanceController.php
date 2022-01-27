@@ -93,6 +93,13 @@ class PayBalanceController extends Controller
             'end_date' => date('Y-m-d', strtotime(str_replace(',', '', $request->end_date))),
         ]);
 
+        // Activate The Reservation
+        if ($transaction->invoice_type == 'reservation') {
+            $transaction->update([
+                'reservation_activated' => 1,
+            ]);
+        }
+
         PayBalance::create([
             'invoice_id' => $request->invoice_id,
             'invoice_status' => $request->balance == 0 ? 'fully_paid' : 'partially_paid',

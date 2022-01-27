@@ -45,6 +45,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('fixed_deposit')->default(0); // fixed balance that stands alone in tenants table
             $table->integer('previous_balance')->default(0); // previous balance that stands alone in tenants table
             $table->boolean('created_another_invoice')->default(0); // control dued invoice when created new invoice
+            $table->boolean('reservation_activated')->default(0); // control if reservation is stayed or not
             $table->timestamps();
         });
     }

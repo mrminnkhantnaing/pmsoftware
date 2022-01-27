@@ -86,10 +86,13 @@ class DashboardController extends Controller
         // Get Balances To Receive
         $balancesToReceiveCount = Transaction::where('balance', '>', 0)->where('paid_balance', 0)->count();
 
+        // Get Reservations
+        $reservationsCount = Transaction::where('invoice_type', 'reservation')->where('reservation_activated', 0)->where('moved', 0)->count();
+
         // Total Fixed Deposit Amount
         $totalFixedDepositAmount = FixedDeposit::pluck('deposit_amount')->sum();
 
-        return view('dashboard', compact('settings', 'buildingsCount', 'floorsCount', 'flatsCount', 'tenantsCount', 'availablePartitionsCount', 'newTenantsWithin1Month', 'recentTransactions', 'recentCardReceipts', 'newTenants', 'totalAmountOfTransactions', 'availableCardsCount', 'partitionsOnNoticeCount', 'invoices', 'duedInvoices', 'todaysInvoicesCount', 'balancesToReceiveCount', 'recentPaybalances', 'totalFixedDepositAmount'));
+        return view('dashboard', compact('settings', 'buildingsCount', 'floorsCount', 'flatsCount', 'tenantsCount', 'availablePartitionsCount', 'newTenantsWithin1Month', 'recentTransactions', 'recentCardReceipts', 'newTenants', 'totalAmountOfTransactions', 'availableCardsCount', 'partitionsOnNoticeCount', 'invoices', 'duedInvoices', 'todaysInvoicesCount', 'balancesToReceiveCount', 'recentPaybalances', 'totalFixedDepositAmount', 'reservationsCount'));
     }
 
     // invoicesToBePaidWithin7Days
@@ -194,8 +197,15 @@ class DashboardController extends Controller
 
     // toPayBalances
     public function toPayBalances() {
-        $transactions = Transaction::where('balance', '>', 0)->where('paid_balance', 0)->latest()->get();
+        $transactions = Transaction::with(['tenant', 'partition', 'flat', 'floor', 'building', 'partition.flat', 'partition.floor', 'partition.building'])->where('balance', '>', 0)->where('paid_balance', 0)->latest()->get();
 
         return view('pages.dashboard.to-pay-balances', compact('transactions'));
+    }
+
+    // Reservations
+    public function reservations() {
+        $reservations = Transaction::with(['tenant', 'partition', 'flat', 'floor', 'building', 'partition.flat', 'partition.floor', 'partition.building'])->where('invoice_type', 'reservation')->where('reservation_activated', 0)->where('moved', 0)->get();
+
+        return view('pages.dashboard.reservations', compact('reservations'));
     }
 }

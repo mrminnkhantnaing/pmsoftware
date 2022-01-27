@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    To Pay Balances | Dashboard | {{ config('app.name', 'PM Software') }}
+    Reservations | Dashboard | {{ config('app.name', 'PM Software') }}
 @endsection
 
 @section('page-specific-head-scripts')
@@ -17,22 +17,22 @@
                     <li class="breadcrumb-item">
                         <a class="text-secondary" href="{{ route('dashboard') }}">DASHBOARD</a>
                     </li>
-                    <li class="breadcrumb-item active text-uppercase" aria-current="page">BALANCES TO RECEIVE ({{ $transactions->count() }})</li>
+                    <li class="breadcrumb-item active text-uppercase" aria-current="page">RESERVATIONS ({{ $reservations->count() }})</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
             @can('create invoices')
-                <a class="btn btn-primary" href="{{ route('invoices.balance.create') }}">PAY BALANCE</a>
+                <a class="btn btn-primary" href="{{ route('invoices.balance.create') }}">ACTIVATE</a>
             @endcan
         </div>
     </div>
 
-    {{-- Transactions --}}
+    {{-- Reservations --}}
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="balances" class="table align-middle table-hover table-striped table-bordered" style="width:100%">
+                <table id="reservations" class="table align-middle table-hover table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -46,7 +46,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($transactions as $index => $transaction)
+                        @foreach ($reservations as $index => $transaction)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td><a class="text-dark" title="View" href="{{ route('invoices.show', $transaction->id) }}">{{ $transaction->invoice_prefix }}{{ $transaction->invoice_no }}</a></td>
@@ -75,6 +75,11 @@
                                             <i class='bx bx-edit-alt me-0'></i>
                                         </a>
                                     @endcan
+
+                                    {{-- Moved Trigger Model --}}
+                                    <button type="button" class="btn btn-{{ $transaction->moved == 1 ? '' : 'outline-' }}secondary" title="Cancel" data-bs-toggle="modal" data-bs-target="#transactionMovedButton{{ $transaction->id }}">
+                                        <i class='bx bx-x me-0'></i>
+                                    </button>
 
                                     @can('delete invoices')
                                         {{-- Button Delete Modal --}}
@@ -192,7 +197,7 @@
     <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#balances').DataTable();
+            $('#reservations').DataTable();
         } );
     </script>
 @endsection

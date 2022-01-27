@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'invoice_no', 'invoice_prefix','invoice_status', 'tenant_id', 'building_id', 'floor_id', 'flat_id', 'partition_id', 'no_of_tenant', 'card_id', 'price','card_price', 'currency', 'start_date', 'end_date','sub_total', 'total_price', 'reservation_date', 'deposit', 'payment_amount', 'rest_payment_date', 'balance', 'referrer_id', 'invoice_type', 'notice', 'moved', 'paid_balance', 'fixed_deposit', 'previous_balance', 'created_another_invoice'];
+    protected $fillable = ['id', 'invoice_no', 'invoice_prefix','invoice_status', 'tenant_id', 'building_id', 'floor_id', 'flat_id', 'partition_id', 'no_of_tenant', 'card_id', 'price','card_price', 'currency', 'start_date', 'end_date','sub_total', 'total_price', 'reservation_date', 'deposit', 'payment_amount', 'rest_payment_date', 'balance', 'referrer_id', 'invoice_type', 'notice', 'moved', 'paid_balance', 'fixed_deposit', 'previous_balance', 'created_another_invoice', 'reservation_activated'];
 
     // Relationship With Tenant
     public function tenant() {

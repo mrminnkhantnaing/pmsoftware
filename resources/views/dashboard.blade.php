@@ -204,17 +204,34 @@
         </div>
 
         {{-- Total Deposits --}}
-        <div class="col">
+        {{-- <div class="col">
             <div class="card radius-10 overflow-hidden">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
                             <p class="mb-1 font-14"><a class="text-secondary" title="Click To View" href="#">Total Deposit <i class='bx bx-info-circle' title="Total fixed deposit amount for all time"></i></a></p>
                             <h5 class="my-0"><a class="text-dark" title="Click To View" href="#">{{ number_format($totalFixedDepositAmount, 0, '.', ',') }} <small>{{ $settings->currency }}</small></a></h5>
-                        </div>
+                        </div> --}}
                         {{-- <a class="ms-auto text-primary font-30" title="Click To View" href="#">
                             <i class='bx bx-wallet'></i>
                         </a> --}}
+                    {{-- </div>
+                 </div>
+            </div>
+        </div> --}}
+
+        {{-- Reservations --}}
+        <div class="col">
+            <div class="card radius-10 overflow-hidden">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-1 font-14"><a class="text-secondary" title="Click To View" href="{{ route('dashboard.reservations') }}">Reservations</a></p>
+                            <h5 class="my-0"><a class="text-dark" title="Click To View" href="{{ route('dashboard.reservations') }}">{{ number_format($reservationsCount, 0, '.', ',') }}</a></h5>
+                        </div>
+                        <a class="ms-auto text-primary font-30" title="Click To View" href="{{ route('dashboard.reservations') }}">
+                            <i class='bx bx-bookmark'></i>
+                        </a>
                     </div>
                  </div>
             </div>

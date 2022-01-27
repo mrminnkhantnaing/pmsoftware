@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/dued-invoices', 'duedInvoices')->name('duedInvoices');
             Route::get('/todays-invoices', 'todaysInvoices')->name('todaysInvoices');
             Route::get('/to-pay-balances', 'toPayBalances')->name('toPayBalances');
+            Route::get('/reservations', 'reservations')->name('reservations');
 
             // Operations Parts
             Route::get('/buildings/floors/flats/{id}', 'flatsShow')->name('flatsShow');
