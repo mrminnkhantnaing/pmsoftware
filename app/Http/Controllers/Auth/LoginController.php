@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -29,6 +31,12 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
     protected $maxAttempts = 3;  // Default is 5
     protected $decayMinutes = 5; // Default is 1
+
+    // Logout Other Devices
+    protected function authenticated(Request $request)
+    {
+        Auth::logoutOtherDevices($request->password);
+    }
 
 
     /**
