@@ -101,6 +101,7 @@
                             <th>Email</th>
                             <th>Role</th>
                             <th>Status</th>
+                            <th>Last Active</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -122,6 +123,9 @@
                                     @else
                                         <span class="text-secondary">Offline</span>
                                     @endif
+                                </td>
+                                <td>
+                                    {{ $user->last_seen ? Carbon\Carbon::parse($user->last_seen)->diffForHumans() : '-' }}
                                 </td>
                                 <td>
                                     {{-- View User Button --}}
