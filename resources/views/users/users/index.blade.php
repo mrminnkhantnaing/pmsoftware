@@ -100,6 +100,7 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -114,6 +115,13 @@
                                     @foreach ($user->roles as $role)
                                         <span>{{ ucfirst($role->name) }}</span>
                                     @endforeach
+                                </td>
+                                <td>
+                                    @if(Cache::has('user-is-online-' . $user->id))
+                                        <span class="text-success">Online</span>
+                                    @else
+                                        <span class="text-secondary">Offline</span>
+                                    @endif
                                 </td>
                                 <td>
                                     {{-- View User Button --}}

@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,8 +26,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('send:dailyreports')->dailyAt('23:59'); // Send daily reports of invoices to admin email address
+        // Send daily reports of invoices to the admin email address
+        if (App::environment(['production'])) {
+            $schedule->command('send:dailyreports')->dailyAt('23:59');
+        }
 
+        // In local & staging envs, refresh the application daily
+        if (App::environment(['local', 'staging'])) {
+            $schedule->command('migrate:fresh --seed')->dailyAt('00:00');
+        }
+
+        // Functions of the application
         $schedule->call(function () {
             // Update Expired Transactions' Relations
             $transactions = \App\Models\Transaction::whereDate('end_date', '<', Carbon::now()->toDateString())->where('notice', 1)->where('moved', 0)->get();
