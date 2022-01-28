@@ -101,7 +101,6 @@
                             <th>Email</th>
                             <th>Role</th>
                             <th>Status</th>
-                            <th>Last Active</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -121,11 +120,12 @@
                                     @if(Cache::has('user-is-online-' . $user->id))
                                         <span class="text-success">Online</span>
                                     @else
-                                        <span class="text-secondary">Offline</span>
+                                        @if ($user->last_seen)
+                                            {{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}
+                                        @else
+                                            -
+                                        @endif
                                     @endif
-                                </td>
-                                <td>
-                                    {{ $user->last_seen ? Carbon\Carbon::parse($user->last_seen)->diffForHumans() : '-' }}
                                 </td>
                                 <td>
                                     {{-- View User Button --}}
