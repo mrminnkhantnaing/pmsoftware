@@ -40,8 +40,8 @@ class DashboardController extends Controller
         $newTenants = Tenant::with('country')->latest()->limit(6)->get();
 
         // Get Total Amount Of Invoice For The Last 30 Days
-        $allTransactions = Transaction::whereDate('created_at', '>', Carbon::now()->subDays(30)->toDateTimeString())->get();
-        $allCardReceipts = CardReceipt::whereDate('created_at', '>', Carbon::now()->subDays(30)->toDateTimeString())->get();
+        $allTransactions = Transaction::whereDate('created_at', '>', Carbon::now()->subDays(30))->get();
+        $allCardReceipts = CardReceipt::whereDate('created_at', '>', Carbon::now()->subDays(30))->get();
 
         $cardTotalPrice = 0;
         foreach ($allCardReceipts as $cardReceipt) {
@@ -56,17 +56,19 @@ class DashboardController extends Controller
         $totalAmountOfTransactions = $subTotalOfTransactions + $cardTotalPrice;
 
         // Get Invoices To Be Paid Within 7 Days
-        $invoices = Transaction::whereDate('end_date', '<=', Carbon::now()->addDays(7)->toDateTimeString())
-                                ->whereDate('end_date', '>=', Carbon::now()->toDateTimeString())
+        $invoices = Transaction::whereDate('end_date', '<', Carbon::now()->addDays(7))
+                                ->whereDate('end_date', '>=', Carbon::now())
                                 ->where('created_another_invoice', 0)
                                 ->where('notice', 0)
                                 ->where('moved', 0)
                                 ->get();
 
         // Get Dued Invoices
-        $duedInvoices = Transaction::whereDate('end_date', '<', Carbon::now()->toDateTimeString())
-                                    ->where('created_another_invoice', 0)
-                                    ->where('notice', 0)->where('moved', 0)->get();
+        $duedInvoices = Transaction::whereDate('end_date', '<', Carbon::now())
+                                ->where('created_another_invoice', 0)
+                                ->where('notice', 0)
+                                ->where('moved', 0)
+                                ->get();
 
         // Get All Available Partitions
         $availablePartitionsCount = Partition::where('status', 'available')->count();
@@ -97,8 +99,8 @@ class DashboardController extends Controller
 
     // invoicesToBePaidWithin7Days
     public function invoicesToBePaidWithin7Days() {
-        $transactions = Transaction::whereDate('end_date', '<=', Carbon::now()->addDays(7)->toDateTimeString())
-                        ->whereDate('end_date', '>=', Carbon::now()->toDateTimeString())
+        $transactions = Transaction::whereDate('end_date', '<', Carbon::now()->addDays(7))
+                        ->whereDate('end_date', '>=', Carbon::now())
                         ->where('created_another_invoice', 0)
                         ->where('notice', 0)
                         ->where('moved', 0)
@@ -110,7 +112,7 @@ class DashboardController extends Controller
 
     // duedInvoices
     public function duedInvoices() {
-        $transactions = Transaction::whereDate('end_date', '<', Carbon::now()->toDateTimeString())
+        $transactions = Transaction::whereDate('end_date', '<', Carbon::now())
                         ->where('created_another_invoice', 0)
                         ->where('notice', 0)
                         ->where('moved', 0)
@@ -122,7 +124,7 @@ class DashboardController extends Controller
 
     // New Tenants
     public function newTenants() {
-        $newTenants = Tenant::whereDate('created_at', '>', Carbon::now()->subDays(30)->toDateTimeString())->get();
+        $newTenants = Tenant::whereDate('created_at', '>', Carbon::now()->subDays(30))->get();
 
         return view('pages.dashboard.new-tenants', compact('newTenants'));
     }
